@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calcular</title>
+
+</head>
+<body>
+		<div id=calculadora>
+		<input class="display" id="screen" value="0"></input>
+		<table>
+			<tr>
+				<td><button type="button" class="keys" onclick="limpiar()">AC</button></td>
+				<td><button type="button" class="keys" onclick="negativo()" >+/-</button></td>
+				<td><button type="button" class="keys" >%</button></td>
+				<td><button type="button" class="keys naranja" onclick="simbolo('/')">/</button></td>
+			</tr>
+			<tr>
+				<td><button type="button" class="keys" onclick="numero(7)" >7</button></td>
+				<td><button type="button" class="keys" onclick="numero(8)" >8</button></td>
+				<td><button type="button" class="keys" onclick="numero(9)">9</button></td>
+				<td><button type="button" class="keys naranja" onclick="simbolo('*')">X</button></td>
+			</tr>
+			<tr>
+				<td><button type="button" class="keys" onclick="numero(4)" >4</button></td>
+				<td><button type="button" class="keys" onclick="numero(5)" >5</button></td>
+				<td><button type="button" class="keys" onclick="numero(6)" >6</button></td>
+				<td><button type="button" class="keys naranja" onclick="simbolo('-')">-</button></td>
+			</tr>
+			<tr>
+				<td><button type="button" class="keys " onclick="numero(1)">1</button></td>
+				<td><button type="button" class="keys " onclick="numero(2)">2</button></td>
+				<td><button type="button" class="keys " onclick="numero(3)">3</button></td>
+				<td><button type="button" class="keys naranja" onclick="simbolo('+')">+</button></td>
+			</tr>
+			<tr>
+				<td colspan="2"><button type="" class="boton1 cero" onclick="numero(0)">0</button></td>
+
+				<td><button type="button" class="keys">.</button></td>
+				<td><button type="button"class="keys naranja" onclick="calcular()">=</button></td>
+			</tr>
+		</table>
+	</div>
+</body>
+			<script type="text/javascript">
+
+
+		
+		let screen=document.getElementById("screen");
+		let tipodesigno="";
+		let n1=0;
+		let n2=0;
+		let num;
+		let pan = "";
+		function numero(num){
+		pan=pan+num;
+		//mostrar la concadenacion en el display
+		screen.value=pan;
+	}
+		//llama a las funciones para realizar la operacion
+		function simbolo(sim){
+			tipodesigno=sim;
+			n1=Number(pan);
+			screen.value="";
+			pan="";
+		}
+		function limpiar(){
+			screen.value="";
+			pan="";
+			//define operador
+		}
+		function calcular(){
+			n2=Number(pan);
+			//instanciar todo en vacio
+			let calc= new _Operacion(n1,n2);
+
+
+		switch(tipodesigno){
+			case "+":
+			calc.sumar().then(function(response)
+			{
+				screen.value=response;
+
+			},function(error)
+			{screen.value="algo esta mal"
+
+			});
+					screen.value=calc.sumar();
+					break;
+			case "-":
+			calc.restar().then(function(response)
+			{
+				screen.value=response;
+
+			},function(error)
+			{screen.value="algo esta mal"
+
+			});
+					screen.value=calc.restar();
+					break;
+			case "*":
+			calc.multi().then(function(response)
+			{
+				screen.value=response;
+
+			},function(error)
+			{screen.value="algo esta mal"
+
+			});
+					screen.value=calc.multi();
+					break;
+
+			case "/":
+			calc.div().then(function(response)
+			{
+				screen.value=response;
+
+			},function(error)
+			{screen.value="algo esta mal"
+
+			});
+					screen.value=calc.div();
+					break;
+		}
+		}
+	</script>
+	<script type="text/javascript" src="ClasesFrontend/calculadora.js"></script>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font: normal 25px Arial, sans-serif;
+  				-webkit-touch-callout: none;
+  				-webkit-user-select: none;
+  				user-select: none;
+}
+			html {
+				height: 100%;
+			}
+			#calculadora {
+				width: 300px;
+				height: 380px;
+				overflow:hidden;
+				margin: 100px auto;
+				padding: 20px 20px 9px;
+				position:relative;
+				background: gray ;
+				border-radius: 3px;
+}
+			#screen {
+			height: 80px;
+			width: 300px;
+			position:absolute;
+  			top:0; left:0;
+			padding: 20px 10px;
+			background: rgba(0, 0, 0, 0.2);
+			font-size: 27px;
+  			font-weight:normal;
+			line-height: 40px;
+			color: white;
+			border: none;
+			text-align: right;
+			letter-spacing: 1px;
+}
+		.cero{
+
+		}
+			.keys{
+				float: left;
+				position: relative;
+				top: 60px;
+				
+				cursor: pointer;
+				
+				width: 65px;
+				height: 56px;
+				
+				background: rgb(136,133,133);
+				border:none;
+				color: white;
+				line-height: 56px;
+				text-align: center;
+				user-select: none;
+			}
+			.boton1{
+				float: left;
+				position: relative;
+				top: 60px;
+				
+				cursor: pointer;
+				
+				width: 134px;
+				height: 56px;
+				
+				background: rgb(136,133,133);
+				border:none;
+				color: white;
+				line-height: 56px;
+				text-align: center;
+				user-select: none;
+			}
+			.naranja{
+				background: #FA7921;
+			}
+
+		</style>
+</html>
